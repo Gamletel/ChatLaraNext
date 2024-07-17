@@ -1,18 +1,19 @@
-'use client'
+async function fetchUsers() {
+    const res = await fetch('http://127.0.0.1:8000/api/users');
+    if (!res.ok) {
+        throw new Error('Failed to fetch users');
+    }
+    return await res.json();
+}
 
-import {useEffect, useState} from "react";
+export default async function UsersPage() {
+    const users = await fetchUsers();
 
-export default function Page(){
-    const [data, setData] = useState(null)
-
-    useEffect(()=>{
-        fetch('http://127.0.0.1:8000/api/users')
-            .then((res)=>res.json())
-            .then((data)=>{
-                setData(data)
-            })
-    }, [])
-    console.log(data);
-
-
+    return (
+        <ul>
+            {users.map((user) => (
+                <li key={user.id}>{user.name}</li>
+            ))}
+        </ul>
+    );
 }
