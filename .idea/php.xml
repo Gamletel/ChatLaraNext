@@ -120,6 +120,7 @@
       <path value="$PROJECT_DIR$/laravel-backend/vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/laravel-backend/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/laravel-backend/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/laravel-backend/vendor/laravel/sanctum" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
