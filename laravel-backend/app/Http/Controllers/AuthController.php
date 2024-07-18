@@ -24,12 +24,7 @@ class AuthController extends Controller
             'password'=>Hash::make($credentials['password']),
         ]);
 
-        if (Auth::attempt($user)){
-            $request->session()->regenerate();
 
-            return response()->json(['message'=>'Registration successful'], 201);
-        }
-
-        return response()->json(['message'=>'Registration failed'], 400);
+        return response()->json(['message'=>'Registration success'], 200);
     }
 }

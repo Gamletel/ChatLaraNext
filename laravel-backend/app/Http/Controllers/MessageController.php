@@ -9,6 +9,7 @@ class MessageController extends Controller
 {
     public function show(int $id)
     {
+        $user = auth()->id();
         $messages = Message::where('fromID', $id)
             ->orWhere('toID', $id)
             ->get();
