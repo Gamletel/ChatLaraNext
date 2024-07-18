@@ -1,6 +1,8 @@
 import {Inter} from "next/font/google";
 import Header from "@/_components/header";
 import Footer from "@/_components/footer";
+import 'bootstrap/dist/css/bootstrap.css'
+import Sidebar from "@/_components/sidebar";
 // import "./globals.css";
 
 const inter = Inter({subsets: ["latin"]});
@@ -14,11 +16,14 @@ export default function RootLayout({children}) {
     return (
         <html lang="ru">
 
-        <body className={inter.className}>
+        <body>
         <Header/>
 
         <div className="container-fluid">
-            {children}
+            <div className="content">
+                <Sidebar/>
+                {children}
+            </div>
         </div>
 
         <Footer/>
