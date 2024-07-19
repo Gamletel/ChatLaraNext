@@ -1,34 +1,28 @@
 'use client'
 
 import {useState} from "react";
+import {useAuth} from "@/app/hooks/auth";
+
 
 export default function Page() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState([]);
 
-    const handleSubmit = async (e) => {
+    const {register, isLoading, user} = useAuth({middleware: 'guest'});
+
+    const submitForm = async e => {
         e.preventDefault();
-        const res = await fetch('http://127.0.0.1:8000/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({name, email, password}),
-        });
 
-        const data = await res.json();
+        setErrors([])
 
-        if (res.ok) {
-            console.log('Регистрация успешна!');
-        } else {
-            console.log(data.message || 'Что-то пошло не так...');
-        }
-    };
+        await register({setErrors, name, email, password})
+    }
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={submitForm} autoComplete={false}>
                 <input type="text"
                        name='name'
                        onChange={(e)=>setName(e.target.value)}
