@@ -3,71 +3,98 @@ import {useEffect, useState} from "react";
 import useSWR from "swr";
 import axios from "@/app/lib/axios";
 
-export const useAuth = ({middleware} = {})=>{
+export const useAuth = ({middleware} = {}) => {
     const router = useRouter();
 
     const [isLoading, setIsLoading] = useState(true);
 
     const {data: user, error, mutate} = useSWR('/api/user',
-        ()=>axios
+        () => axios
             .get('/api/user')
-            .then(response=>response.data.data)
-            .catch(error=>{
+            .then(response => {
+                console.log('Response from /api/user:', response); // Вставляем console.log здесь
+                return response.data.user;
+            })            .catch(error => {
                 if (error.response.status !== 409)
                     throw error
-            }),
+            })
     )
 
     const csrf = () => axios.get('/sanctum/csrf-cookie')
 
-    const login = async ({setErrors, ...props}) =>{
-        setErrors([]);
-
+    const login = async ({setErrors, ...props}) => {
         await csrf();
+
+        setErrors([]);
 
         axios
             .post('/api/login', props)
-            .then(()=>mutate() && router.push('/'))
-            .catch(error =>{
-                if(error.response.status !== 422) throw error
+            .then(response => {
+                const token = response.data.access_token;
+                // Сохраняем токен в localStorage
+                localStorage.setItem('token', token);
 
-                setErrors(Object.values(error.response.data.errors).flat())
+                // Обновляем данные пользователя
+                mutate('/api/user'); // Вызов mutate обновит данные из /api/user
+                router.push('/');
+            })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
             })
     }
 
-    const logout = async ()=> {
-        await axios.post('/api/logout');
+    const logout = async () => {
+        try {
+            await csrf();
 
-        mutate(null);
+            await axios.post('/api/logout');
 
-        router.push('/')
+            localStorage.removeItem('token');
+
+            await mutate(null);
+
+            router.push('/');
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
     }
 
-    const register = async ({setErrors, ...props})=> {
+    const register = async ({setErrors, ...props}) => {
         setErrors([]);
 
         await csrf();
 
         axios
             .post('/api/register', props)
-            .then(() => mutate() && router.push('/'))
-            .catch(error =>{
-                if(error.response.status !== 422) throw error
+            .then(response => {
+                // const token = response.data.access_token;
+                // Сохраняем токен в localStorage
+                // localStorage.setItem('token', token);
 
-                setErrors(Object.values(error.response.data.errors).flat())
-            });
+                mutate('/api/user');
+                router.push('/');
+            }).catch(error => {
+            if (error.response.status !== 422) throw error
+
+            setErrors(Object.values(error.response.data.errors).flat())
+        });
     };
 
-    useEffect(()=>{
-        if(user || error){
+    useEffect(() => {
+        if (user || error) {
             setIsLoading(false);
         }
 
-        if(middleware === 'guest' && user) router.push('/');
-        if(middleware === 'auth' && error) router.push('/');
+        if (middleware === 'guest' && user) router.push('/');
+        if (middleware === 'auth' && error) router.push('/');
     })
 
-    return{
+    // console.log(user);
+    // console.log(localStorage.getItem('token'));
+
+    return {
         user,
         csrf,
         isLoading,

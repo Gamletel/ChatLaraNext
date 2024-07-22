@@ -2,6 +2,7 @@
 
 import {useState} from "react";
 import {useAuth} from "@/app/hooks/auth";
+import Input from "@/_components/input";
 
 
 export default function Page() {
@@ -22,22 +23,21 @@ export default function Page() {
 
     return (
         <div>
-            <form onSubmit={submitForm} autoComplete={false}>
-                <input type="text"
+            <form onSubmit={submitForm}>
+                <Input type="text"
                        name='name'
                        onChange={(e)=>setName(e.target.value)}
-                       className="form-control"
                        placeholder='Имя'/>
-                <input type="email"
+
+                <Input type="email"
                        name='email'
                        onChange={(e)=>setEmail(e.target.value)}
-                       className="form-control"
                        placeholder='Email'
                        required/>
-                <input type="password"
+
+                <Input type="password"
                        name='password'
                        onChange={(e)=>setPassword(e.target.value)}
-                       className="form-control"
                        placeholder='Пароль'
                        required/>
 

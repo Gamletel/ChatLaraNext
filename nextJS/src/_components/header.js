@@ -1,6 +1,19 @@
+'use client'
+
 import Link from "next/link";
+import {useAuth} from "@/app/hooks/auth";
 
 export default function Header() {
+    const {user, logout} = useAuth({middleware: 'auth'});
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        await logout();
+    };
+
+    console.log(user);
+
+
     return (
         <header>
             <div className='container-fluid'>
@@ -8,9 +21,22 @@ export default function Header() {
                     <Link href='/users' className='btn btn-primary'>
                         Все пользователи
                     </Link>
+
                     <Link href='/register' className='btn btn-primary'>
                         Регистрация
                     </Link>
+
+                    <Link href='/login' className='btn btn-primary'>
+                        Войти
+                    </Link>
+
+                    <form onSubmit={handleLogout}>
+                        <button type="submit" className="btn btn-primary">
+                            Logout
+                        </button>
+                    </form>
+
+                    <h2>привет, {user?.name}</h2>
                 </div>
             </div>
         </header>
