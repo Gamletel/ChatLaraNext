@@ -5,12 +5,9 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/laravel-backend/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/laravel-backend/tests" isTestSource="true" packagePrefix="Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/laravel-backend/tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/laravel-backend/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/laravel-backend/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/laravel-backend/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
-      <sourceFolder url="file://$MODULE_DIR$/laravel-backend/tests/Unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/clue/redis-protocol" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/clue/redis-react" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/evenement/evenement" />
