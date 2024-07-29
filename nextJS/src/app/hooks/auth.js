@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import useSWR from "swr";
 import axios from "@/app/lib/axios";
 
+
 export const useAuth = ({middleware} = {}) => {
     const router = useRouter();
 
@@ -12,7 +13,7 @@ export const useAuth = ({middleware} = {}) => {
         () => axios
             .get('/api/user')
             .then(response => {
-                console.log('Response from /api/user:', response); // Вставляем console.log здесь
+                console.log('Response from /api/user:', response);
                 return response.data.user;
             })            .catch(error => {
                 if (error.response.status !== 409)
@@ -31,15 +32,16 @@ export const useAuth = ({middleware} = {}) => {
             .post('/api/login', props)
             .then(response => {
                 const token = response.data.access_token;
-                // Сохраняем токен в localStorage
+
                 localStorage.setItem('token', token);
 
                 // Обновляем данные пользователя
-                mutate('/api/user'); // Вызов mutate обновит данные из /api/user
+                mutate('/api/user');
                 router.push('/');
+                window.location.reload();
             })
             .catch(error => {
-                if (error.response.status !== 422) throw error
+                // if (error.response.status !== 422) throw error
 
                 setErrors(error.response.data.errors)
             })
@@ -49,13 +51,13 @@ export const useAuth = ({middleware} = {}) => {
         try {
             await csrf();
 
-            await axios.post('/api/logout');
+            await axios.post('/api/logout')
+                .then(()=>mutate());
 
             localStorage.removeItem('token');
 
-            await mutate(null);
-
             router.push('/');
+            window.location.reload();
         } catch (error) {
             console.error('Logout failed:', error);
         }
@@ -70,7 +72,6 @@ export const useAuth = ({middleware} = {}) => {
             .post('/api/register', props)
             .then(response => {
                 // const token = response.data.access_token;
-                // Сохраняем токен в localStorage
                 // localStorage.setItem('token', token);
 
                 mutate('/api/user');

@@ -20,9 +20,12 @@ export default function RootLayout({children}) {
         <Header/>
 
         <div className="container-fluid">
-            <div className="content">
+            <div className="d-flex gap-3">
                 <Sidebar/>
-                {children}
+
+                <div className='p-3 border border-primary rounded flex-grow-1'>
+                    {children}
+                </div>
             </div>
         </div>
 

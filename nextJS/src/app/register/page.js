@@ -4,7 +4,6 @@ import {useState} from "react";
 import {useAuth} from "@/app/hooks/auth";
 import Input from "@/_components/input";
 
-
 export default function Page() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');

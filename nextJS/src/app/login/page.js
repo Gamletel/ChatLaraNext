@@ -1,7 +1,7 @@
 'use client'
 
 import Input from "@/_components/input";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useAuth} from "@/app/hooks/auth";
 
 export default function Page(){
@@ -20,6 +20,10 @@ export default function Page(){
         await login({setErrors, email, password});
     }
 
+    useEffect(() => {
+        console.log(errors);
+    }, [errors]);
+
     return (
         <form onSubmit={handleSubmit}>
             <Input
@@ -37,6 +41,8 @@ export default function Page(){
                 type={'password'} />
 
             <button type="submit" className="btn btn-primary">Войти</button>
+
+            {errors.message ? <div className='text-sm text-danger'>{errors.message}</div> : null}
         </form>
     )
 }

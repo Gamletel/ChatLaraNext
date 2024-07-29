@@ -13,4 +13,11 @@ class UserController extends Controller
 
         return json_encode($users);
     }
+
+    public function find(Request $request)
+    {
+        $users = User::where("name", $request["name"])->get();
+
+        return response()->json(["users" => $users]);
+    }
 }

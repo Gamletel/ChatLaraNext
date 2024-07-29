@@ -9,11 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.51.11",
+    "@tanstack/react-router": "^1.45.10",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
     "swr": "^2.2.5"
+  },
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.51.12",
+    "laravel-echo": "^1.16.1",
+    "pusher-js": "^8.4.0-rc2"
   }
 }

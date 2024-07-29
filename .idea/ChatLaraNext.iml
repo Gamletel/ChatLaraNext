@@ -10,7 +10,23 @@
       <sourceFolder url="file://$MODULE_DIR$/laravel-backend/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/laravel-backend/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/laravel-backend/tests/Unit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/clue/redis-protocol" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/clue/redis-react" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/evenement/evenement" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/laravel/reverb" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/laravel/sanctum" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/paragonie/sodium_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/pusher/pusher-php-server" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/ratchet/rfc6455" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/react/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/react/dns" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/react/event-loop" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/react/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/react/promise-timer" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/react/socket" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-backend/vendor/react/stream" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
